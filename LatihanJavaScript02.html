@@ -69,12 +69,10 @@
       const li = document.createElement("li");
       li.textContent = text;
 
-      // Klik 1x untuk tandai selesai
       li.onclick = function () {
         li.classList.toggle("done");
       };
 
-      // Klik 2x untuk hapus
       li.ondblclick = function () {
         if (confirm(`Hapus tugas: "${text}"?`)) {
           li.remove();
@@ -86,7 +84,6 @@
       input.focus();
     }
 
-    // Tekan Enter untuk menambah tugas
     input.addEventListener("keypress", function (e) {
       if (e.key === "Enter") {
         tambahTugas();
