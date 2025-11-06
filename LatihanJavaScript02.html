@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="id">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Latihan JavaScript 02 - To Do List</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+    }
+
+    h1 {
+      color: #2c3e50;
+    }
+
+    input[type="text"] {
+      padding: 8px;
+      font-size: 16px;
+      width: 220px;
+    }
+
+    button {
+      padding: 8px 12px;
+      font-size: 16px;
+      margin-left: 4px;
+      cursor: pointer;
+    }
+
+    ul {
+      margin-top: 20px;
+    }
+
+    li {
+      font-size: 18px;
+      margin: 6px 0;
+      cursor: pointer;
+    }
+
+    li.done {
+      text-decoration: line-through;
+      color: gray;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Latihan JavaScript 02 - To Do List</h1>
+  <p>Tambahkan tugas di bawah ini, klik item untuk menandai selesai, dan klik dua kali untuk menghapus.</p>
+
+  <input type="text" id="taskInput" placeholder="Tulis tugas..." />
+  <button onclick="tambahTugas()">Tambah</button>
+
+  <ul id="todoList">
+  </ul>
+
+  <script>
+    const input = document.getElementById("taskInput");
+    const list = document.getElementById("todoList");
+
+    function tambahTugas() {
+      const text = input.value.trim();
+      if (text === "") {
+        alert("Tugas tidak boleh kosong!");
+        return;
+      }
+
+      const li = document.createElement("li");
+      li.textContent = text;
+
+      // Klik 1x untuk tandai selesai
+      li.onclick = function () {
+        li.classList.toggle("done");
+      };
+
+      // Klik 2x untuk hapus
+      li.ondblclick = function () {
+        if (confirm(`Hapus tugas: "${text}"?`)) {
+          li.remove();
+        }
+      };
+
+      list.appendChild(li);
+      input.value = "";
+      input.focus();
+    }
+
+    // Tekan Enter untuk menambah tugas
+    input.addEventListener("keypress", function (e) {
+      if (e.key === "Enter") {
+        tambahTugas();
+      }
+    });
+  </script>
+</body>
+
+</html>
